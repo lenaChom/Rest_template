@@ -10,7 +10,7 @@ public class RestService {
     public static void main(String[] args) {
         RestTemplate restTemplate = new RestTemplate();
 
-        //Получение списка всех пользователей
+        //получение списка всех пользователей
         ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
         HttpHeaders headers = response.getHeaders();
         sessionId = headers.getFirst(HttpHeaders.SET_COOKIE);
@@ -18,7 +18,7 @@ public class RestService {
         System.out.println("Список всех пользователей:");
         System.out.println(response.getBody());
 
-        //Сохранение пользователя
+        //сохранение пользователя
         User newUser = new User(3L,"James","Brown",(byte) 30);
 
         HttpHeaders postHeaders = new HttpHeaders();
@@ -29,7 +29,7 @@ public class RestService {
         System.out.println("Результат добавления пользователя:");
         System.out.println(postRequest.getBody());
 
-        //Изменение пользователя
+        //изменение пользователя
         User updatedUser = new User(3L, "Thomas", "Shelby", (byte) 30);
         HttpHeaders updateHeaders = new HttpHeaders();
         updateHeaders.set(HttpHeaders.COOKIE, sessionId);
@@ -41,7 +41,7 @@ public class RestService {
         System.out.println("Пользователь обновлен: ");
         System.out.println(updateRequest.getBody());
 
-        //Удаление пользователя
+        //удаление пользователя
         HttpHeaders deleteHeaders = new HttpHeaders();
         deleteHeaders.set(HttpHeaders.COOKIE, sessionId);
         HttpEntity<String> deleteRequest = new HttpEntity<>(deleteHeaders);
